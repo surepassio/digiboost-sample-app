@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F3"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#B8B8B8"
+        app:strokeWidth="0.5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="20dp"
+            android:paddingTop="60dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="60dp">
+
+            <ImageView
+                android:id="@+id/ivSurePassLogo"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:src="@drawable/surepass_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAPIHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/google_sans_medium"
+                android:text="Enter API Token"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivSurePassLogo" />
+
+            <TextView
+                android:id="@+id/tvAPISubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/google_sans_regular"
+                android:text="Paste your API login token here"
+                android:textColor="#787878"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAPIHeading" />
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="25dp"
+                android:background="#D1D1D1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAPISubHeading" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilApiToken"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="?colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etApiToken"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="API Login Token"
+                    android:inputType="textImeMultiLine"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/etResponse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_box"
+                android:cursorVisible="false"
+                android:enabled="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:focusedByDefault="false"
+                android:gravity="start|top"
+                android:maxLines="8"
+                android:minLines="8"
+                android:padding="10dp"
+                android:scrollIndicators="top|end"
+                android:scrollbars="vertical"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilApiToken"
+                tools:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/btnCopyButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/copy_icon"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/etResponse"
+                app:layout_constraintEnd_toEndOf="@id/etResponse"
+                tools:visibility="visible" />
+
+            <Button
+                android:id="@+id/btnGetStarted"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="Get Started"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:cornerRadius="5dp"
+                app:icon="@drawable/arrow"
+                app:iconGravity="textEnd"
+                app:iconSize="16dp"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etResponse" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/llPoweredBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <TextView
+            android:id="@+id/tvPoweredBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/google_sans_regular"
+            android:text="Powered by"
+            android:textColor="@color/sure_pass_color"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivPoweredByLogo"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/sure_pass_logo_white"
+            app:layout_constraintBottom_toBottomOf="@id/tvPoweredBy"
+            app:layout_constraintStart_toEndOf="@id/tvPoweredBy"
+            app:layout_constraintTop_toTopOf="@id/tvPoweredBy"
+            app:tint="@color/sure_pass_color" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

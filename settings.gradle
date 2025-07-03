@@ -1,0 +1,26 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+
+        maven {
+            url = "https://maven.pkg.github.com/surepassio/digiboost-sample-app"
+            credentials {
+                username = "YOUR USERNAME"
+                password = "YOUR PAT TOKEN"
+            }
+        }
+    }
+}
+rootProject.name = "Digiboost Sample App"
+include ':app'
