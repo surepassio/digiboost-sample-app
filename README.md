@@ -44,6 +44,30 @@ include ':app'
    }
 ```
 Make sure to sync your project after adding the dependency.
+#### 3. Generating Your SDK Token :
+You will be getting the API collection from your sales manager
+1. **Obtain API Details**  
+   Get the Digilocker initialize endpoint and any credentials from your sales manager.
+2. **Request a Token**  
+   ```bash
+   curl https://sandbox.surepass.io/api/v1/digilocker/initialize```
+2. After Initialize You’ll receive a response like:
+```json
+    {
+    "data": {
+        "client_id": "digilocker_cntWpMxWHbcvgghtyvxw",
+        "token": "TOKEN FOR INTITALIZE SDK",
+        "expiry_seconds": 600.0
+    },
+    "status_code": 200,
+    "message_code": "success",
+    "message": "Success",
+    "success": true
+}
+```
+
+3. Copy token from response paste it below at placeholder YOUR TOKEN and intialize SDK.
+
 #### 3. Inside Application:
 ```kotlin
    binding.btnGetStarted.setOnClickListener {
@@ -56,7 +80,7 @@ Make sure to sync your project after adding the dependency.
 SDK will be started from openActivity function
 ```kotlin 
     private fun openActivity(env: String, token: String) {
-        val intent = Intent(this, InitSDK::class.java)
+        val intent = Intent(this, InitSdk::class.java)
         intent.putExtra("token", token)
         intent.putExtra("env", env)
         digiboostActivityResultLauncher.launch(intent)
@@ -83,36 +107,28 @@ For better clarification you can check the code details inside the project
 
 ### Change Theme Of SDK
 
-To customize the theme of the SDK, you can modify the `themes.xml` file. If your project has set up the theme in the `styles.xml` file instead, the steps will be the same for that as well.:
+To customize the theme of the SDK, you can modify the `colors.xml` file. :
 
-1. **Locate the `themes.xml` file**:
+1. **Locate the `colors.xml` file**:
    You can usually find this file in the `res/values` directory of your Android project.
+   Inside the `colors.xml` file, you'll see a style defined for your application theme. It typically looks like this:
 
-2. **Update the theme**:
-   Inside the `themes.xml` file, you'll see a style defined for your application theme. It typically looks like this:
+      ```xml
+    <resources>
+        <color name="black">#FF000000</color>
+        <color name="white">#FFFFFFFF</color>
+        <color name="background_color">#B82C5A</color>
+    </resources>
+    ```
 
-   ```xml
-   <resources xmlns:tools="http://schemas.android.com/tools">
-       <!-- Base application theme. -->
-       <style name="Base.Theme.DigiboostSampleApp" parent="Theme.Material3.DayNight.NoActionBar">
-           <!-- Customize your SDK theme here. -->
-            <item name="colorPrimary">@color/background_color</item>
-       </style>
 
-       <style name="Theme.DigiboostSampleApp" parent="Base.Theme.DigiboostSampleApp" />
-   </resources>
-   ```
-
-3. **Change the primary color**:
-   Modify the `<item name="colorPrimary">@color/background_color</item>` line to change theme. Replace `@color/background_color` with the color resource you want to use.
-
-   For example, if you want to change the primary color to red, you can use:
+3. **Implement the Surepass color**:
+   Add the `<color name="surepass_color">#FF9800</color>` line. Replace HEX code with the color resource you want to use.
+   For example, if you want to change the theme color to red, you can use:
 
    ```xml
-   <item name="colorPrimary">@color/red</item>
+   <color name="surepass_color">@color/red</color>
    ```
-
-   Ensure that the color resource you refer to exists in your `colors.xml` file or define it if it doesn't.
 
 4. **Save your changes**.
 
