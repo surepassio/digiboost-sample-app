@@ -405,7 +405,7 @@ After making changes:
 If you encounter any issues:
 - **Check the troubleshooting section** above
 - **Contact your sales manager** for API-related issues
-- **Contact Tech Support at** <contact@surepass.io> 
+- **Contact Tech Support at** <techsupport@surepass.app> 
 - **Review the logs** for detailed error messages
 
 ---
