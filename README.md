@@ -146,6 +146,8 @@ You'll receive a response like this:
 
 The Digiboost SDK is hosted on GitHub Packages. You need a Personal Access Token to access it.
 
+*[Watch Video Tutorial For Generating PAT Token](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/Generating.PAT.Token.mp4)*
+
 #### 2.1 Navigate to GitHub Settings
 1. Go to [GitHub.com](https://github.com) and log in
 2. Click your **profile picture** (top-right corner)
