@@ -397,6 +397,9 @@ After making changes:
 - Check that all dependencies are properly synced
 - Ensure you've registered the activity result launcher before `onCreate` completes
 
+
+Try Our *[Sample App](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/digiboost-sample-app.apk)*
+
 ---
 
 ## 📱 Testing Your Integration
