@@ -35,6 +35,8 @@ Contact your sales manager to receive:
 - **Authorization Bearer Token** (required for API access)
 - Access permissions
 
+*[Watch Video Tutorial For Generating SDK Token ](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/API.Tutorial.mov)*.
+
 #### 1.2 Environment Configuration
 
 We provide two environments for different stages of development:
