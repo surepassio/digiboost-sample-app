@@ -6,6 +6,11 @@ Welcome to the **Digiboost Android SDK Sample App**! This guide will walk you th
 
 The Digiboost SDK enables secure document verification and digital identity services in your Android app. Follow this guide to get up and running in minutes.
 
+
+Please find the *[Documentation Link](https://console.surepass.app/product/console/api-lists?active=16301914&leafId=16301914&path=%2Fdocs%2Fkyc%2Finitialize-16301914e0&expanded=3588860%2C3588870)*.
+
+Visit our Website *[Surepass.io](https://surepass.io)*.
+
 ---
 
 ## 📋 Prerequisites
