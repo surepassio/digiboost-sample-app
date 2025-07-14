@@ -35,7 +35,7 @@ Contact your sales manager to receive:
 - **Authorization Bearer Token** (required for API access)
 - Access permissions
 
-*[Watch Video Tutorial For Generating SDK Token ](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/API.Tutorial.mov)*.
+:movie_camera: *[Watch Video Tutorial For Generating SDK Token ](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/API.Tutorial.mov)*.
 
 #### 1.2 Environment Configuration
 
@@ -146,7 +146,7 @@ You'll receive a response like this:
 
 The Digiboost SDK is hosted on GitHub Packages. You need a Personal Access Token to access it.
 
-*[Watch Video Tutorial For Generating PAT Token](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/Generating.PAT.Token.mp4)*
+:movie_camera: *[Watch Video Tutorial For Generating PAT Token](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/Generating.PAT.Token.mp4)*
 
 #### 2.1 Navigate to GitHub Settings
 1. Go to [GitHub.com](https://github.com) and log in
