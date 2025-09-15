@@ -56,6 +56,7 @@ curl --location 'https://sandbox.surepass.app/api/v1/digilocker/initialize' \
 --data '{
     "data": {
         "signup_flow": true,
+        "auth_type": "app",
         "logo_url": "YOUR BRAND LOGO URL",
         "voice_assistant_lang": "en",
         "voice_assistant": false,
@@ -73,6 +74,7 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/initialize' \
 --data '{
     "data": {
         "signup_flow": true,
+        "auth_type": "app",
         "logo_url": "YOUR BRAND LOGO URL",
         "voice_assistant_lang": "en",
         "voice_assistant": false,
@@ -87,6 +89,7 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/initialize' \
 | Parameter | Type | Required | Description | Default Value |
 |-----------|------|----------|-------------|---------------|
 | `signup_flow` | boolean | ✅ **Required** | This parameter should always be `true` for SDK initialization | `true` |
+| `auth_type` | string | ✅ **Required** | Authentication type - must be set to `"app"` for SDK integration | `"app"` |
 | `logo_url` | string | ❌ Optional | Your branding logo URL - customize with your own logo | None |
 | `voice_assistant_lang` | string | ❌ Optional | Voice assistant language. Possible options: `"en"` (English), `"hi"` (Hindi) | `"en"` |
 | `voice_assistant` | boolean | ❌ Optional | Enable/disable voice assistant functionality | `false` |
@@ -99,7 +102,8 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/initialize' \
 ```json
 {
     "data": {
-        "signup_flow": true
+        "signup_flow": true,
+        "auth_type": "app"
     }
 }
 ```
@@ -109,6 +113,7 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/initialize' \
 {
     "data": {
         "signup_flow": true,
+        "auth_type": "app",
         "logo_url": "https://yourcompany.com/logo.png",
         "voice_assistant_lang": "hi",
         "voice_assistant": true,
