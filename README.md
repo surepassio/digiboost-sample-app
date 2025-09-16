@@ -354,6 +354,192 @@ private fun showResponse(response: String?) {
 
 ---
 
+## 📥 Step 4: Download Aadhaar
+
+After successful verification through the SDK, you can download the Aadhaar document using the Download Aadhaar API.
+
+### 4.1 Download Aadhaar API
+
+Use the `client_id` received from the SDK success response to download the Aadhaar document.
+
+**For UAT Environment:**
+
+```bash
+curl --location 'https://sandbox.surepass.app/api/v1/digilocker/download-aadhaar' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer TOKEN_GOT_FROM_SALES_MANAGER' \
+--data '{
+    "client_id": "CLIENT_ID_FROM_SDK_SUCCESS_RESPONSE"
+}'
+```
+
+**For Production Environment:**
+
+```bash
+curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/download-aadhaar' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer TOKEN_GOT_FROM_SALES_MANAGER' \
+--data '{
+    "client_id": "CLIENT_ID_FROM_SDK_SUCCESS_RESPONSE"
+}'
+```
+
+### 4.2 API Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `client_id` | string | ✅ **Required** | The client ID received from the SDK success response after verification |
+
+### 4.3 API Response
+
+**Success Response:**
+
+```json
+{
+  "data": {
+    "aadhaar_pdf": "base64_encoded_pdf_data",
+    "aadhaar_xml": "base64_encoded_xml_data",
+    "name": "John Doe",
+    "aadhaar_number": "XXXX-XXXX-1234",
+    "date_of_birth": "01-01-1990",
+    "gender": "M",
+    "address": {
+      "house": "123",
+      "street": "Main Street",
+      "landmark": "Near Park",
+      "locality": "Central Area",
+      "vtc": "City Name",
+      "district": "District Name",
+      "state": "State Name",
+      "pincode": "123456"
+    }
+  },
+  "status_code": 200,
+  "message_code": "success",
+  "message": "Aadhaar downloaded successfully",
+  "success": true
+}
+```
+
+**Error Response:**
+
+```json
+{
+  "data": null,
+  "status_code": 400,
+  "message_code": "error",
+  "message": "Invalid client_id or verification not completed",
+  "success": false
+}
+```
+
+### 4.4 Implementation Example
+
+Here's how you can implement the Download Aadhaar API call in your Android app:
+
+```kotlin
+private fun downloadAadhaar(clientId: String) {
+    val apiUrl = if (isProduction) {
+        "https://kyc-api.surepass.app/api/v1/digilocker/download-aadhaar"
+    } else {
+        "https://sandbox.surepass.app/api/v1/digilocker/download-aadhaar"
+    }
+    
+    val requestBody = JSONObject().apply {
+        put("client_id", clientId)
+    }
+    
+    val request = Request.Builder()
+        .url(apiUrl)
+        .addHeader("Content-Type", "application/json")
+        .addHeader("Authorization", "Bearer $YOUR_API_TOKEN")
+        .post(requestBody.toString().toRequestBody("application/json".toMediaType()))
+        .build()
+    
+    client.newCall(request).enqueue(object : Callback {
+        override fun onResponse(call: Call, response: Response) {
+            if (response.isSuccessful) {
+                val responseBody = response.body?.string()
+                handleAadhaarDownloadSuccess(responseBody)
+            } else {
+                handleAadhaarDownloadError("API Error: ${response.code}")
+            }
+        }
+        
+        override fun onFailure(call: Call, e: IOException) {
+            handleAadhaarDownloadError("Network Error: ${e.message}")
+        }
+    })
+}
+
+private fun handleAadhaarDownloadSuccess(responseJson: String?) {
+    try {
+        val jsonResponse = JSONObject(responseJson ?: "")
+        val data = jsonResponse.getJSONObject("data")
+        
+        // Extract user information
+        val name = data.getString("name")
+        val aadhaarNumber = data.getString("aadhaar_number")
+        val dateOfBirth = data.getString("date_of_birth")
+        val gender = data.getString("gender")
+        
+        // Extract documents (base64 encoded)
+        val aadhaarPdf = data.getString("aadhaar_pdf")
+        val aadhaarXml = data.getString("aadhaar_xml")
+        
+        // Extract address
+        val address = data.getJSONObject("address")
+        val fullAddress = "${address.getString("house")}, ${address.getString("street")}, " +
+                         "${address.getString("locality")}, ${address.getString("vtc")}, " +
+                         "${address.getString("district")}, ${address.getString("state")} - ${address.getString("pincode")}"
+        
+        // Process the downloaded data
+        Log.d("AadhaarDownload", "Name: $name, Aadhaar: $aadhaarNumber")
+        
+        // Save or display the documents
+        saveAadhaarDocuments(aadhaarPdf, aadhaarXml)
+        
+    } catch (e: Exception) {
+        Log.e("AadhaarDownload", "Error parsing response: ${e.message}")
+    }
+}
+
+private fun saveAadhaarDocuments(pdfBase64: String, xmlBase64: String) {
+    try {
+        // Decode base64 and save PDF
+        val pdfBytes = Base64.decode(pdfBase64, Base64.DEFAULT)
+        val pdfFile = File(filesDir, "aadhaar_document.pdf")
+        pdfFile.writeBytes(pdfBytes)
+        
+        // Decode base64 and save XML
+        val xmlBytes = Base64.decode(xmlBase64, Base64.DEFAULT)
+        val xmlFile = File(filesDir, "aadhaar_data.xml")
+        xmlFile.writeBytes(xmlBytes)
+        
+        Log.d("AadhaarDownload", "Documents saved successfully")
+        
+    } catch (e: Exception) {
+        Log.e("AadhaarDownload", "Error saving documents: ${e.message}")
+    }
+}
+
+private fun handleAadhaarDownloadError(error: String) {
+    Log.e("AadhaarDownload", "Download failed: $error")
+    Toast.makeText(this, "Failed to download Aadhaar: $error", Toast.LENGTH_SHORT).show()
+}
+```
+
+### 4.5 Important Notes
+
+- **Client ID Source**: The `client_id` must be obtained from the SDK success response after verification
+- **Data Format**: PDF and XML data are base64 encoded and need to be decoded before use
+- **Security**: Store the downloaded data securely according to your compliance requirements
+- **API Response**: The response includes both document files and extracted user information
+- **Error Handling**: Always implement proper error handling for network requests
+- **Permissions**: Ensure your app has appropriate storage permissions if saving files locally
+
+---
+
 ## 🎨 Customizing SDK Theme
 
 You can customize the SDK's appearance by modifying your app's `colors.xml`:
