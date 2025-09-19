@@ -230,7 +230,7 @@ android {
 
 dependencies {
     // Digiboost SDK dependency
-    implementation 'io.surepass.sdk:digiboost-android-sdk:1.0.0'
+    implementation 'io.surepass.sdk:digiboost-android-sdk:1.0.1'
     
     // ... your other dependencies
 }
