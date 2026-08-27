@@ -1,11 +1,6 @@
-# Digiboost Android SDK - Complete Integration Guide
+# Digilocker Android SDK - Integration Guide
 
-Welcome to the **Digiboost Android SDK Sample App**! This guide will walk you through a simple 3-step journey to integrate the Digiboost Android SDK V2 into your application.
-
-## 🚀 Quick Overview
-
-The Digiboost SDK enables secure document verification and digital identity services in your Android app. Follow this guide to get up and running in minutes.
-
+This repository is the public distribution channel for the **Digilocker Android SDK** (formerly Digiboost): the SDK artifact is published to this repository's GitHub Packages registry, and the sample app here shows a complete working integration.
 
 Please find the *[Documentation Link](https://console.surepass.app/product/console/api-lists?active=16301914&leafId=16301914&path=%2Fdocs%2Fkyc%2Finitialize-16301914e0&expanded=3588860%2C3588870)*.
 
@@ -13,29 +8,30 @@ Visit our Website *[Surepass.io](https://surepass.io)*.
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 - **Android Studio** (latest version recommended)
-- **Minimum SDK**: 26
-- **Target SDK**: 33+
+- **Minimum SDK**: 28
+- **Compile SDK**: 36 (Target SDK 34+)
 - **Java/Kotlin** support
-- **GitHub account** (for accessing SDK repository)
+- **GitHub account** (for accessing the SDK package)
 
 ---
 
-## 🎯 3-Step Integration Journey
+## 3-Step Integration Journey
 
 ### Step 1: Generating Your SDK Token
 
-Before integrating the SDK, you need to obtain an authentication token from the Digiboost API.
+Before integrating the SDK, you need to obtain an authentication token from the API.
 
 #### 1.1 Get API Details from Your Sales Manager
+
 Contact your sales manager to receive:
 - Digilocker initialize endpoint URL
 - **Authorization Bearer Token** (required for API access)
 - Access permissions
 
-:movie_camera: *[Watch Video Tutorial For Generating SDK Token ](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/API.Tutorial.mov)*.
+*[Watch Video Tutorial For Generating SDK Token](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/API.Tutorial.mov)*
 
 #### 1.2 Environment Configuration
 
@@ -88,13 +84,13 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/initialize' \
 
 | Parameter | Type | Required | Description | Default Value |
 |-----------|------|----------|-------------|---------------|
-| `signup_flow` | boolean | ✅ **Required** | This parameter should always be `true` for SDK initialization | `true` |
-| `auth_type` | string | ✅ **Required** | Authentication type - must be set to `"app"` for SDK integration | `"app"` |
-| `logo_url` | string | ❌ Optional | Your branding logo URL - customize with your own logo | None |
-| `voice_assistant_lang` | string | ❌ Optional | Voice assistant language. Possible options: `"en"` (English), `"hi"` (Hindi) | `"en"` |
-| `voice_assistant` | boolean | ❌ Optional | Enable/disable voice assistant functionality | `false` |
-| `retry_count` | integer | ❌ Optional | Number of allowed retries during dropout prevention | `2` |
-| `skip_main_screen` | boolean | ❌ Optional | Whether to show the first intro screen or skip it | `true` |
+| `signup_flow` | boolean | Yes | This parameter should always be `true` for SDK initialization | `true` |
+| `auth_type` | string | Yes | Authentication type - must be set to `"app"` for SDK integration | `"app"` |
+| `logo_url` | string | No | Your branding logo URL - customize with your own logo | None |
+| `voice_assistant_lang` | string | No | Voice assistant language. Possible options: `"en"` (English), `"hi"` (Hindi) | `"en"` |
+| `voice_assistant` | boolean | No | Enable/disable voice assistant functionality | `false` |
+| `retry_count` | integer | No | Number of allowed retries during dropout prevention | `2` |
+| `skip_main_screen` | boolean | No | Whether to show the first intro screen or skip it | `true` |
 
 #### 1.5 Customization Examples
 
@@ -124,6 +120,7 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/initialize' \
 ```
 
 #### 1.6 API Response
+
 You'll receive a response like this:
 
 ```json
@@ -140,7 +137,7 @@ You'll receive a response like this:
 }
 ```
 
-**Important**: 
+**Important**:
 - Copy the `token` value - you'll need this for Step 3!
 - The token expires in 600 seconds (10 minutes) by default
 - Store the `client_id` if needed for tracking purposes
@@ -149,9 +146,9 @@ You'll receive a response like this:
 
 ### Step 2: Creating GitHub Personal Access Token (PAT)
 
-The Digiboost SDK is hosted on GitHub Packages. You need a Personal Access Token to access it.
+The Digilocker SDK is hosted on GitHub Packages. You need a Personal Access Token to download it, even though the package is public - this is a GitHub Packages requirement.
 
-:movie_camera: *[Watch Video Tutorial For Generating PAT Token](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/Generating.PAT.Token.mp4)*
+*[Watch Video Tutorial For Generating PAT Token](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/Generating.PAT.Token.mp4)*
 
 #### 2.1 Navigate to GitHub Settings
 1. Go to [GitHub.com](https://github.com) and log in
@@ -169,11 +166,10 @@ The Digiboost SDK is hosted on GitHub Packages. You need a Personal Access Token
 4. Select **Generate new token (classic)**
 
 #### 2.4 Configure Token Settings
-1. **Note**: Enter a descriptive name like "Digiboost SDK Access"
+1. **Note**: Enter a descriptive name like "Digilocker SDK Access"
 2. **Expiration**: Choose your preferred expiration (30 days, 60 days, etc.)
-3. **Scopes**: Check the following permissions:
-   - ✅ `read:packages` (Download packages from GitHub Package Registry)
-   - ✅ `repo` (Full control of private repositories) - if needed
+3. **Scopes**: Check the following permission:
+   - `read:packages` (Download packages from GitHub Package Registry)
 
 #### 2.5 Generate and Save Token
 1. Click **Generate token** at the bottom
@@ -188,7 +184,6 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
         gradlePluginPortal()
     }
 }
@@ -197,10 +192,9 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        jcenter()
         mavenCentral()
-        
-        // GitHub Packages repository for Digiboost SDK
+
+        // GitHub Packages repository for the Digilocker SDK
         maven {
             url = "https://maven.pkg.github.com/surepassio/digiboost-sample-app"
             credentials {
@@ -210,33 +204,32 @@ dependencyResolutionManagement {
         }
     }
 }
-
-rootProject.name = "Digiboost Sample App"
-include ':app'
 ```
 
 **Update `build.gradle` (app level):**
 ```groovy
 android {
-    compileSdk 33
-    
+    compileSdk 36
+
     defaultConfig {
-        minSdk 26  // Required minimum SDK
-        targetSdk 33
+        minSdk 28  // Required minimum SDK
+        targetSdk 34
         // ... other config
     }
     // ... other configuration
 }
 
 dependencies {
-    // Digiboost SDK dependency
-    implementation 'io.surepass.sdk:digiboost-android-sdk:1.0.1'
-    
+    // Digilocker SDK dependency
+    implementation 'io.surepass.sdk:digilocker-sdk:1.2.2'
+
     // ... your other dependencies
 }
 ```
 
 **Sync your project** after making these changes.
+
+Note on ProGuard/R8: the SDK ships its own consumer rules inside the AAR, so apps that build with `minifyEnabled true` do not need any manual keep rules for the SDK.
 
 ---
 
@@ -247,114 +240,87 @@ Now let's integrate the SDK into your application with proper initialization and
 #### 3.1 Initialize the SDK in Your Activity
 
 ```kotlin
+import io.surepass.digilocker.ui.activity.Environment
+import io.surepass.digilocker.ui.activity.InitSdk
+
 class MainActivity : AppCompatActivity() {
-    
+
     private lateinit var binding: ActivityMainBinding
-    private lateinit var digiboostActivityResultLauncher: ActivityResultLauncher<Intent>
-    
+    private lateinit var sdkLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
+
         // Register for activity result before onCreate completes
         registerActivityForResult()
-        
+
         // Set up button click listener
         setupSdkLaunch()
     }
-    
+
     private fun setupSdkLaunch() {
         binding.btnGetStarted.setOnClickListener {
             // Use the token from Step 1
             val token = "YOUR_TOKEN_FROM_STEP_1"  // Replace with actual token
-            val env = "PREPROD"  // or "PROD" for production
-            
-            openDigiboostActivity(env, token)
+            val env = Environment.SANDBOX.value   // "PREPROD"; use Environment.PROD.value for production
+
+            openDigilockerActivity(env, token)
         }
     }
 }
 ```
 
-#### 3.2 Launch Digiboost SDK Activity
+#### 3.2 Launch the Digilocker SDK Activity
 
 ```kotlin
-private fun openDigiboostActivity(env: String, token: String) {
-    try {
-        val intent = Intent(this, InitSdk::class.java).apply {
-            putExtra("token", token)
-            putExtra("env", env)
-        }
-        digiboostActivityResultLauncher.launch(intent)
-    } catch (e: Exception) {
-        Log.e("MainActivity", "Error launching Digiboost SDK: ${e.message}")
-        // Handle error appropriately
+private fun openDigilockerActivity(env: String, token: String) {
+    val intent = Intent(this, InitSdk::class.java).apply {
+        putExtra(InitSdk.EXTRA_TOKEN, token)  // JWT, without the "Bearer " prefix
+        putExtra(InitSdk.EXTRA_ENV, env)
     }
+    sdkLauncher.launch(intent)
 }
 ```
 
-#### 3.3 Handle SDK Response
+#### 3.3 Handle the SDK Response
 
 ```kotlin
 private fun registerActivityForResult() {
-    digiboostActivityResultLauncher = registerForActivityResult(
+    sdkLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         when (result.resultCode) {
             RESULT_OK -> {
-                val data = result.data
-                if (data != null) {
-                    val digiboostResponse = data.getStringExtra("signedResponse")
-                    Log.d("MainActivity", "Digiboost Response: $digiboostResponse")
-                    handleSuccessResponse(digiboostResponse)
+                val signedResponse = result.data?.getStringExtra(InitSdk.EXTRA_SIGNED_RESPONSE)
+                if (signedResponse != null) {
+                    Log.d("MainActivity", "Digilocker response: $signedResponse")
+                    handleSuccessResponse(signedResponse)
                 } else {
-                    Log.w("MainActivity", "No data received from Digiboost SDK")
+                    Log.w("MainActivity", "No data received from the Digilocker SDK")
                 }
             }
             RESULT_CANCELED -> {
-                Log.i("MainActivity", "User cancelled Digiboost SDK")
-                handleCancelledResponse()
+                Log.i("MainActivity", "User cancelled the Digilocker SDK")
             }
             else -> {
                 Log.e("MainActivity", "Unexpected result code: ${result.resultCode}")
-                handleErrorResponse("Unexpected result")
             }
         }
     }
 }
 
-private fun handleSuccessResponse(response: String?) {
-    response?.let {
-        // Process the signed response
-        showResponse(it)
-        // Parse and handle the response according to your app's needs
-    }
-}
-
-private fun handleCancelledResponse() {
-    // Handle user cancellation
-    Toast.makeText(this, "Document verification cancelled", Toast.LENGTH_SHORT).show()
-}
-
-private fun handleErrorResponse(error: String) {
-    // Handle error cases
-    Toast.makeText(this, "Error: $error", Toast.LENGTH_SHORT).show()
-}
-
-private fun showResponse(response: String?) {
-    // Display response in your UI
-    // You can show it in a dialog, text view, or navigate to a results screen
-    AlertDialog.Builder(this)
-        .setTitle("Verification Complete")
-        .setMessage("Response: $response")
-        .setPositiveButton("OK", null)
-        .show()
+private fun handleSuccessResponse(response: String) {
+    // The response is a JSON string with status_code, message and data fields.
+    // Parse and handle it according to your app's needs. A status_code of 200
+    // means the user completed the flow and shared the requested documents.
 }
 ```
 
 ---
 
-## 📥 Step 4: Download Aadhaar
+## Step 4: Download Aadhaar
 
 After successful verification through the SDK, you can download the Aadhaar document using the Download Aadhaar API.
 
@@ -388,7 +354,7 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/download-aadhaar
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `client_id` | string | ✅ **Required** | The client ID received from the SDK success response after verification |
+| `client_id` | string | Yes | The client ID received from the SDK success response after verification |
 
 ### 4.3 API Response
 
@@ -433,126 +399,25 @@ curl --location 'https://kyc-api.surepass.app/api/v1/digilocker/download-aadhaar
 }
 ```
 
-### 4.4 Implementation Example
-
-Here's how you can implement the Download Aadhaar API call in your Android app:
-
-```kotlin
-private fun downloadAadhaar(clientId: String) {
-    val apiUrl = if (isProduction) {
-        "https://kyc-api.surepass.app/api/v1/digilocker/download-aadhaar"
-    } else {
-        "https://sandbox.surepass.app/api/v1/digilocker/download-aadhaar"
-    }
-    
-    val requestBody = JSONObject().apply {
-        put("client_id", clientId)
-    }
-    
-    val request = Request.Builder()
-        .url(apiUrl)
-        .addHeader("Content-Type", "application/json")
-        .addHeader("Authorization", "Bearer $YOUR_API_TOKEN")
-        .post(requestBody.toString().toRequestBody("application/json".toMediaType()))
-        .build()
-    
-    client.newCall(request).enqueue(object : Callback {
-        override fun onResponse(call: Call, response: Response) {
-            if (response.isSuccessful) {
-                val responseBody = response.body?.string()
-                handleAadhaarDownloadSuccess(responseBody)
-            } else {
-                handleAadhaarDownloadError("API Error: ${response.code}")
-            }
-        }
-        
-        override fun onFailure(call: Call, e: IOException) {
-            handleAadhaarDownloadError("Network Error: ${e.message}")
-        }
-    })
-}
-
-private fun handleAadhaarDownloadSuccess(responseJson: String?) {
-    try {
-        val jsonResponse = JSONObject(responseJson ?: "")
-        val data = jsonResponse.getJSONObject("data")
-        
-        // Extract user information
-        val name = data.getString("name")
-        val aadhaarNumber = data.getString("aadhaar_number")
-        val dateOfBirth = data.getString("date_of_birth")
-        val gender = data.getString("gender")
-        
-        // Extract documents (base64 encoded)
-        val aadhaarPdf = data.getString("aadhaar_pdf")
-        val aadhaarXml = data.getString("aadhaar_xml")
-        
-        // Extract address
-        val address = data.getJSONObject("address")
-        val fullAddress = "${address.getString("house")}, ${address.getString("street")}, " +
-                         "${address.getString("locality")}, ${address.getString("vtc")}, " +
-                         "${address.getString("district")}, ${address.getString("state")} - ${address.getString("pincode")}"
-        
-        // Process the downloaded data
-        Log.d("AadhaarDownload", "Name: $name, Aadhaar: $aadhaarNumber")
-        
-        // Save or display the documents
-        saveAadhaarDocuments(aadhaarPdf, aadhaarXml)
-        
-    } catch (e: Exception) {
-        Log.e("AadhaarDownload", "Error parsing response: ${e.message}")
-    }
-}
-
-private fun saveAadhaarDocuments(pdfBase64: String, xmlBase64: String) {
-    try {
-        // Decode base64 and save PDF
-        val pdfBytes = Base64.decode(pdfBase64, Base64.DEFAULT)
-        val pdfFile = File(filesDir, "aadhaar_document.pdf")
-        pdfFile.writeBytes(pdfBytes)
-        
-        // Decode base64 and save XML
-        val xmlBytes = Base64.decode(xmlBase64, Base64.DEFAULT)
-        val xmlFile = File(filesDir, "aadhaar_data.xml")
-        xmlFile.writeBytes(xmlBytes)
-        
-        Log.d("AadhaarDownload", "Documents saved successfully")
-        
-    } catch (e: Exception) {
-        Log.e("AadhaarDownload", "Error saving documents: ${e.message}")
-    }
-}
-
-private fun handleAadhaarDownloadError(error: String) {
-    Log.e("AadhaarDownload", "Download failed: $error")
-    Toast.makeText(this, "Failed to download Aadhaar: $error", Toast.LENGTH_SHORT).show()
-}
-```
-
-### 4.5 Important Notes
+### 4.4 Important Notes
 
 - **Client ID Source**: The `client_id` must be obtained from the SDK success response after verification
 - **Data Format**: PDF and XML data are base64 encoded and need to be decoded before use
 - **Security**: Store the downloaded data securely according to your compliance requirements
-- **API Response**: The response includes both document files and extracted user information
 - **Error Handling**: Always implement proper error handling for network requests
 - **Permissions**: Ensure your app has appropriate storage permissions if saving files locally
 
 ---
 
-## 🎨 Customizing SDK Theme
+## Customizing the SDK Theme
 
-You can customize the SDK's appearance by modifying your app's `colors.xml`:
+The SDK's primary color comes from its `sure_pass_color` resource. Override it by defining the same color name in your app's `colors.xml` - app resources take precedence over library resources:
 
 **File: `res/values/colors.xml`**
 ```xml
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="background_color">#B82C5A</color>
-    
-    <!-- Add this line to customize Digiboost SDK theme -->
-    <color name="surepass_color">#FF9800</color>  <!-- Replace with your brand color -->
+    <!-- Add this line to customize the Digilocker SDK theme -->
+    <color name="sure_pass_color">#FF9800</color>  <!-- Replace with your brand color -->
 </resources>
 ```
 
@@ -562,14 +427,36 @@ After making changes:
 
 ---
 
-## 🔧 Troubleshooting
+## Upgrading from digiboost-android-sdk (1.x)
+
+Version 1.2.2 renames the library. To upgrade:
+
+1. **Change the dependency coordinates:**
+   - Old: `implementation 'io.surepass.sdk:digiboost-android-sdk:<version>'`
+   - New: `implementation 'io.surepass.sdk:digilocker-sdk:1.2.2'`
+2. **Change the imports** - the SDK package moved from `io.surepass.digiboost` to `io.surepass.digilocker`:
+   - `import io.surepass.digilocker.ui.activity.InitSdk`
+   - `import io.surepass.digilocker.ui.activity.Environment`
+3. **Raise `minSdk` to 28** if your app is below it.
+4. **Remove any manual ProGuard/R8 keep rules** for `io.surepass.digiboost.**` - the SDK now ships consumer rules inside the AAR.
+5. Behavior changes to be aware of:
+   - The SDK now survives Android killing the app process in the background: instead of crashing, it restarts its flow automatically.
+   - Network and parsing failures are reported with `status_code` 450 (previously these were reported as 401; 401 now indicates an actual authorization failure).
+   - Telemetry failures no longer abort the verification flow.
+   - The SDK screens are portrait-only.
+   - Workarounds for the earlier process-death crash (for example `android:stateNotNeeded="true"` on the SDK activity, or clearing its saved state via lifecycle callbacks) are no longer needed and should be removed.
+
+---
+
+## Troubleshooting
 
 ### Common Issues and Solutions
 
 #### Issue: "Unable to resolve dependency"
-**Solution**: 
+**Solution**:
 - Verify your GitHub username and PAT token in `settings.gradle`
 - Ensure your PAT token has `read:packages` permission
+- Check that the dependency uses the new artifact name: `digilocker-sdk`
 - Check your internet connection
 
 #### Issue: "Token expired" error
@@ -579,21 +466,20 @@ After making changes:
 
 #### Issue: "Minimum SDK version" error
 **Solution**:
-- Ensure your `minSdk` is set to 26 or higher
+- Ensure your `minSdk` is set to 28 or higher
 - Update your `build.gradle` accordingly
 
 #### Issue: SDK not launching
 **Solution**:
-- Verify the token format is correct
+- Verify the token format is correct (pass the raw JWT, without the "Bearer " prefix)
 - Check that all dependencies are properly synced
 - Ensure you've registered the activity result launcher before `onCreate` completes
-
 
 Try Our *[Sample App](https://github.com/surepassio/digiboost-sample-app/releases/download/1.0.0/digiboost-sample-app.apk)*
 
 ---
 
-## 📱 Testing Your Integration
+## Testing Your Integration
 
 1. **Build and run** your application
 2. **Tap the "Get Started" button** (or your trigger button)
@@ -603,20 +489,16 @@ Try Our *[Sample App](https://github.com/surepassio/digiboost-sample-app/release
 
 ---
 
-## 📞 Support
+## Support
 
 If you encounter any issues:
 - **Check the troubleshooting section** above
 - **Contact your sales manager** for API-related issues
-- **Contact Tech Support at** <techsupport@surepass.app> 
+- **Contact Tech Support at** <techsupport@surepass.app>
 - **Review the logs** for detailed error messages
 
 ---
 
-## 📄 License
+## License
 
 This sample application is provided as-is for integration testing purposes.
-
----
-
-**✨ You're all set! Your Digiboost SDK integration is complete.** 
