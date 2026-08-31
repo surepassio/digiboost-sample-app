@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "io.surepass.digiboostsampleapp"
-        minSdk 28
+        minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -41,5 +41,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.13.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
 
-    implementation 'io.surepass.sdk:digilocker-sdk:1.2.2'
+    implementation 'io.surepass.sdk:digilocker-sdk:1.2.3'
 }

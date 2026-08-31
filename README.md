@@ -11,7 +11,7 @@ Visit our Website *[Surepass.io](https://surepass.io)*.
 ## Prerequisites
 
 - **Android Studio** (latest version recommended)
-- **Minimum SDK**: 28
+- **Minimum SDK**: 26
 - **Compile SDK**: 36 (Target SDK 34+)
 - **Java/Kotlin** support
 - **GitHub account** (for accessing the SDK package)
@@ -212,7 +212,7 @@ android {
     compileSdk 36
 
     defaultConfig {
-        minSdk 28  // Required minimum SDK
+        minSdk 26  
         targetSdk 34
         // ... other config
     }
@@ -221,7 +221,7 @@ android {
 
 dependencies {
     // Digilocker SDK dependency
-    implementation 'io.surepass.sdk:digilocker-sdk:1.2.2'
+    implementation 'io.surepass.sdk:digilocker-sdk:1.2.3'
 
     // ... your other dependencies
 }
